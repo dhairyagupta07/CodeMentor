@@ -135,6 +135,18 @@ npm run dev
 
 This starts the Vite client and Express API together. Open the client URL printed in the terminal (normally [http://localhost:5173](http://localhost:5173)). The API health check is [http://localhost:5000/api/health](http://localhost:5000/api/health).
 
+## ☁️ Deploying the client to Vercel
+
+The root [`vercel.json`](./vercel.json) builds the Vite client from the monorepo and rewrites client-side routes to `index.html`. Import the repository into Vercel with the **repository root** as the project root; the configured build output is `client/dist`.
+
+The Express API and MongoDB are separate services in this project. Deploy the API to a Node.js host and provision MongoDB, then configure these environment variables:
+
+- **Vercel client:** `VITE_API_URL=https://your-api-host.example.com/api`
+- **API host:** `MONGODB_URI`, `JWT_SECRET` (at least 32 characters), `CLIENT_ORIGIN=https://your-vercel-domain.example`, and `NODE_ENV=production`
+- **API host, optional:** `JUDGE0_URL` to use a Judge0-compatible endpoint other than the public default
+
+Set `VITE_API_URL` in Vercel's project environment-variable settings for each deployment environment, then redeploy. It must include the `/api` path. `CLIENT_ORIGIN` must exactly match the deployed client origin so credentialed authentication requests are allowed. The API's production auth cookie is cross-site, HTTP-only, and secure; deploy the client and API over HTTPS.
+
 ## 🧰 Everyday commands
 
 Run commands from the repository root:
