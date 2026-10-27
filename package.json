@@ -1,0 +1,23 @@
+{
+  "name": "codementor",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w client\" \"npm run dev -w server\"",
+    "build": "npm run build -w client",
+    "lint": "npm run lint -w client",
+    "seed": "npm run seed -w server"
+  },
+  "overrides": {
+    "monaco-editor": {
+      "dompurify": "^3.4.17"
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
