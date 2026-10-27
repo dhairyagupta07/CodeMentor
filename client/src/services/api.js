@@ -1,7 +1,9 @@
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/+$/, '')
+
 export async function api(path, options = {}) {
   let response
   try {
-    response = await fetch(`/api${path}`, {
+    response = await fetch(`${API_BASE_URL}${path}`, {
       ...options,
       credentials: 'include',
       headers: {
