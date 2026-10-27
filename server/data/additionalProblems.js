@@ -1,0 +1,96 @@
+const arrayStarter = (comment) => ({
+  python: `n = int(input())\nnums = list(map(int, input().split()))\n\n# ${comment}\n`,
+  java: `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] nums = new int[n];\n        for (int i = 0; i < n; i++) nums[i] = sc.nextInt();\n        // ${comment}\n    }\n}`,
+  cpp: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> nums(n);\n    for (int& value : nums) cin >> value;\n    // ${comment}\n    return 0;\n}`,
+})
+
+export const additionalProblems = [
+  {
+    title: 'Contains Duplicate',
+    slug: 'contains-duplicate',
+    difficulty: 'Easy',
+    topics: ['Array', 'Hash Table'],
+    acceptance: 61,
+    description: 'Given an integer array, print `true` if any value appears at least twice, otherwise print `false`.\n\nInput starts with `n`, followed by the array.',
+    hints: ['A repeated value can be detected by comparing the array length with the number of unique values.', 'A hash set gives expected linear time.'],
+    examples: [
+      { input: '4\n1 2 3 1', output: 'true', explanation: 'The value 1 appears twice.' },
+      { input: '4\n1 2 3 4', output: 'false', explanation: 'All values are distinct.' },
+    ],
+    constraints: ['1 <= n <= 100,000', '-1,000,000,000 <= nums[i] <= 1,000,000,000'],
+    starterCode: arrayStarter('Print true if any number occurs more than once, otherwise false.'),
+    testCases: [
+      { input: '4\n1 2 3 1', output: 'true' },
+      { input: '4\n1 2 3 4', output: 'false' },
+      { input: '3\n0 0 1', output: 'true' },
+      { input: '5\n-1 0 2 4 8', output: 'false', isHidden: true },
+    ],
+  },
+  {
+    title: 'Reverse Array',
+    slug: 'reverse-array',
+    difficulty: 'Easy',
+    topics: ['Array', 'Two Pointers'],
+    acceptance: 73,
+    description: 'Reverse the given integer array and print its values separated by spaces.\n\nInput starts with `n`, followed by the array.',
+    hints: ['The first and last elements exchange places, then the next pair moves inward.', 'You can swap symmetric elements until the two indices meet.'],
+    examples: [
+      { input: '5\n1 2 3 4 5', output: '5 4 3 2 1', explanation: 'Print the values in reverse order.' },
+      { input: '3\n-1 0 7', output: '7 0 -1', explanation: 'The order is reversed without changing values.' },
+    ],
+    constraints: ['1 <= n <= 100,000', '-1,000,000 <= nums[i] <= 1,000,000'],
+    starterCode: arrayStarter('Print the array in reverse order, separated by spaces.'),
+    testCases: [
+      { input: '5\n1 2 3 4 5', output: '5 4 3 2 1' },
+      { input: '3\n-1 0 7', output: '7 0 -1' },
+      { input: '1\n9', output: '9' },
+      { input: '4\n2 2 0 -3', output: '-3 0 2 2', isHidden: true },
+    ],
+  },
+  {
+    title: 'Move Zeroes',
+    slug: 'move-zeroes',
+    difficulty: 'Easy',
+    topics: ['Array', 'Two Pointers'],
+    acceptance: 58,
+    description: 'Move all zeroes to the end of the array while preserving the order of non-zero values. Print the resulting array separated by spaces.\n\nInput starts with `n`, followed by the array.',
+    hints: ['First identify where the next non-zero value belongs.', 'Compact non-zero values from the beginning, then fill the remaining positions with zeroes.'],
+    examples: [
+      { input: '5\n0 1 0 3 12', output: '1 3 12 0 0', explanation: 'Non-zero values keep their original order.' },
+      { input: '3\n0 0 1', output: '1 0 0', explanation: 'Both zeroes move to the end.' },
+    ],
+    constraints: ['1 <= n <= 100,000', '-1,000,000 <= nums[i] <= 1,000,000'],
+    starterCode: arrayStarter('Move zeroes to the end, preserving the order of non-zero values, then print the array.'),
+    testCases: [
+      { input: '5\n0 1 0 3 12', output: '1 3 12 0 0' },
+      { input: '3\n0 0 1', output: '1 0 0' },
+      { input: '4\n1 2 3 4', output: '1 2 3 4' },
+      { input: '4\n0 -1 0 2', output: '-1 2 0 0', isHidden: true },
+    ],
+  },
+  {
+    title: 'Climbing Stairs',
+    slug: 'climbing-stairs',
+    difficulty: 'Easy',
+    topics: ['Dynamic Programming', 'Math'],
+    acceptance: 52,
+    description: 'You are climbing a staircase with `n` steps. Each time you can climb either 1 or 2 steps. Print the number of distinct ways to reach the top.\n\nThe input is a single integer `n`.',
+    hints: ['The final move to step n must come from step n-1 or n-2.', 'The number of ways follows the Fibonacci recurrence, with one way to reach step 1 and two ways to reach step 2.'],
+    examples: [
+      { input: '2', output: '2', explanation: 'The options are 1+1 and 2.' },
+      { input: '3', output: '3', explanation: 'The options are 1+1+1, 1+2, and 2+1.' },
+    ],
+    constraints: ['1 <= n <= 45'],
+    starterCode: {
+      python: 'n = int(input())\n\n# Print the number of distinct ways to climb n steps\n',
+      java: 'import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Print the number of distinct ways to climb n steps\n    }\n}',
+      cpp: '#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // Print the number of distinct ways to climb n steps\n    return 0;\n}',
+    },
+    testCases: [
+      { input: '2', output: '2' },
+      { input: '3', output: '3' },
+      { input: '1', output: '1' },
+      { input: '10', output: '89', isHidden: true },
+    ],
+  },
+]
