@@ -6,7 +6,7 @@
 
 Practice data structures and algorithms in a focused workspace. Learn from each attempt, build steady habits, and track progress at your own pace.
 
-[Get started](#-get-started) · [Features](#-what-you-can-do) · [Architecture](#-how-it-fits-together) · [Commands](#-everyday-commands)
+[Demo](#-demo) · [Get started](#-get-started) · [Features](#-what-you-can-do) · [Architecture](#-how-it-fits-together) · [Commands](#-everyday-commands)
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
@@ -28,6 +28,10 @@ Practice data structures and algorithms in a focused workspace. Learn from each 
 | Reveal progressive hints and public edge cases | Practice debugging and step through algorithm visualizations | Review topic insights and your learning journal |
 
 The interface includes a persistent light/dark theme, editor preferences, keyboard shortcuts, and focused practice sessions.
+
+## 🎬 Demo
+
+Watch the [CodeMentor demo video](https://www.loom.com/share/f0d4b2bf3afe425bbe3a45d24082814a) to see how the app works.
 
 ## 🧭 How it fits together
 
@@ -135,11 +139,28 @@ npm run dev
 
 This starts the Vite client and Express API together. Open the client URL printed in the terminal (normally [http://localhost:5173](http://localhost:5173)). The API health check is [http://localhost:5000/api/health](http://localhost:5000/api/health).
 
+## 🚂 Deploying the backend to Render
+
+Create a **Web Service** in Render and connect this repository. Because the backend is in an npm workspace, configure the service as follows:
+
+- **Root Directory:** leave blank (repository root)
+- **Build Command:** `npm install`
+- **Start Command:** `npm run start -w server`
+
+Add these environment variables in the Render service settings:
+
+- `MONGODB_URI` — your MongoDB connection string
+- `JWT_SECRET` — a private random secret of at least 32 characters
+- `CLIENT_ORIGIN` — the exact origin of your deployed frontend, such as `https://your-vercel-domain.example`
+- `NODE_ENV` — `production`
+
+Render provides the `PORT` environment variable automatically. After deployment, check that `https://<your-render-service>.onrender.com/api/health` returns `{"status":"ok"}`. Use your Render service URL (ending in `/api`) for the frontend's `VITE_API_URL` setting below.
+
 ## ☁️ Deploying the client to Vercel
 
 The root [`vercel.json`](./vercel.json) builds the Vite client from the monorepo and rewrites client-side routes to `index.html`. Import the repository into Vercel with the **repository root** as the project root; the configured build output is `client/dist`.
 
-The Express API and MongoDB are separate services in this project. Deploy the API to a Node.js host and provision MongoDB, then configure these environment variables:
+The Express API and MongoDB are separate services in this project. Deploy the API to Render using the instructions above and provision MongoDB, then configure these environment variables:
 
 - **Vercel client:** `VITE_API_URL=https://your-api-host.example.com/api`
 - **API host:** `MONGODB_URI`, `JWT_SECRET` (at least 32 characters), `CLIENT_ORIGIN=https://your-vercel-domain.example`, and `NODE_ENV=production`
