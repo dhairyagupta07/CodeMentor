@@ -12,7 +12,6 @@ Practice data structures and algorithms in a focused workspace. Learn from each 
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4-111111?logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb&logoColor=white)
-![License](https://img.shields.io/badge/status-learning%20project-796BE7)
 
 </div>
 
